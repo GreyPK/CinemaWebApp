@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Запрос 2";
+}
+
+<h3>Запрос 2. Подсчитать количество фильмов в определенном жанре среди сеансов в этом месяце, у которых базовая цена от 70 до 100</h3>
+
+<pre>
+        SELECT film.genre, COUNT(*) FROM film
+        INNER JOIN session ON session.id_film = film.id_film
+        WHERE session.base_price BETWEEN '70' AND '100' 
+        GROUP BY film.genre
+</pre>
+
+
+
+@foreach (var item in ViewBag.data)
+{
+    @Html.ActionLink((string) (item["genre"] + ", количество: " + item["count"]), "Details", "films", new {id = item["id_film"]}, null)
+    <br/>
+}

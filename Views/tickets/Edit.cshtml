@@ -1,0 +1,66 @@
+﻿@model ticket
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ticket</h4>
+        <hr/>
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <div class="form-group">
+            @Html.LabelFor(model => model.nomber_row, new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nomber_row, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.nomber_row, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nomber_seat, new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nomber_seat, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.nomber_seat, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.id_ticket)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_margin, "id_margin", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownList("id_margin", null, new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.id_margin, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_session, "id_session", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownList("id_session", null, new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.id_session, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

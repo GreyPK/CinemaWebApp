@@ -1,0 +1,40 @@
+﻿@model room
+
+@{
+    ViewBag.Title = "Удаление кинозала";
+}
+
+<h2>Удаление кинозала</h2>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            Номер кинозала
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.number_room)
+        </dd>
+
+        <dt>
+            Тип кинозала
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.room_type.name_type_room)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default"/> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

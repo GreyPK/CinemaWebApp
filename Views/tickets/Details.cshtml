@@ -1,0 +1,91 @@
+﻿@model ticket
+
+@{
+    ViewBag.Title = "Билет подробнее";
+}
+
+<h2>Билет подробнее</h2>
+
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            Номер ряда
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomber_row)
+        </dd>
+
+        <dt>
+            Номер места
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomber_seat)
+        </dd>
+
+        <dt>
+            Коэффициент наценки
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.margin.coef_start)
+        </dd>
+
+        <dt>
+            Дата
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.session.date_session.Day).@Html.DisplayFor(model => model.session.date_session.Month).@Html.DisplayFor(model => model.session.date_session.Year)
+        </dd>
+        <dt>
+            Время
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.session.time_session)
+        </dd>
+        <dt>
+            Базовая цена
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.session.base_price)
+        </dd>
+        <dt>
+            Название фильма
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.session.film.film_name)
+        </dd>
+        <dt>
+            Жанр фильма
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.session.film.genre)
+        </dd>
+        <dt>
+            Тип фильма
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.session.film.film_type.film_type_name)
+        </dd>
+        <dt>
+            Номер кинозала
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.session.room.number_room)
+        </dd>
+        <dt>
+            Тип кинозала
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.session.room.room_type.name_type_room)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Удалить", "Delete", new {id = Model.id_ticket}) |
+    @Html.ActionLink("Назад", "Index")
+</p>

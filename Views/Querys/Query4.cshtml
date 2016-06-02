@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Запрос 4";
+}
+
+<h3>Запрос 4. Показать кинозалы с типом "Стандартный" и отсортировать по номеру кинозала</h3>
+
+<pre>
+        SELECT * FROM room
+        INNER JOIN room_type ON room.id_type_room = room_type.id_type_room
+        WHERE room_type.name_type_room = 'Стандартный'
+        ORDER BY room.number_room
+</pre>
+
+
+@using (Html.BeginForm("Query4", "Querys", FormMethod.Get))
+{
+    <p>
+        Тип кинозала : @Html.TextBox("type") <br/>
+        <input type="submit" value="искать">
+
+    </p>
+}
+
+@if (ViewBag.data != null)
+{
+    foreach (var room in ViewBag.data)
+    {
+        @Html.ActionLink((string) room.number_room.ToString(), "Details", "rooms", new {id = room.id_room}, null)
+        <br/>
+    }
+}

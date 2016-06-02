@@ -1,0 +1,25 @@
+﻿@model IEnumerable<film_type>
+
+@{
+    ViewBag.Title = "Типы фильмов";
+}
+
+<h2>Типы фильмов</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Тип фильма
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.film_type_name)
+            </td>
+        </tr>
+    }
+
+</table>

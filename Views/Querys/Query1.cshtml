@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Запрос 1";
+}
+
+<h3>Запрос 1. Показать все 3д/2д фильмы, отсортировать по имени фильма</h3>
+
+<pre>
+    SELECT * FROM film
+    INNER JOIN film_type ON film.id_film_type = film_type.id_film_type
+    WHERE film_type.film_type_name = '2d'
+    ORDER BY film.film_name
+</pre>
+
+
+@using (Html.BeginForm("Query1", "Querys", FormMethod.Get))
+{
+    <p>
+        Тип фильма : @Html.TextBox("type") <br/>
+        <input type="submit" value="искать">
+
+    </p>
+}
+
+@if (ViewBag.data != null)
+{
+    foreach (var film in ViewBag.data)
+    {
+        @Html.ActionLink((string) film.film_name, "Details", "films", new {id = film.id_film}, null)
+        <br/>
+    }
+}

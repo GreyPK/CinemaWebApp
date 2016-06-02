@@ -1,0 +1,42 @@
+﻿@model room_type
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>room_type</h4>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name_type_room)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name_type_room)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.count_rows)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.count_rows)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.count_seats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.count_seats)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {id = Model.id_type_room}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

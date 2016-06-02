@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Запрос 1";
+}
+
+<h3>Запрос 3. Показать сеансы с комейдиными фильмами в 1 кинозале</h3>
+
+<pre>
+       SELECT * FROM
+       (SELECT *
+       FROM session
+       INNER JOIN film ON session.id_film = film.id_film
+       WHERE film.genre = 'комедия') AS sel1
+       INNER JOIN room ON sel1.id_room = room.id_room
+       WHERE room.number_room = 1
+</pre>
+
+
+@using (Html.BeginForm("Query3", "Querys", FormMethod.Get))
+{
+    <p>
+        Жанр фильма : @Html.TextBox("genre") <br/>
+        Номер кинозала : @Html.TextBox("roomNumber") <br/>
+        <input type="submit" value="искать">
+
+    </p>
+}
+
+@if (ViewBag.data != null)
+{
+    foreach (var session in ViewBag.data)
+    {
+        @Html.ActionLink((string) (session["id_session"] + " " + session["film_name"]), "Details", "sessions", new {id = session["id_session"]}, null)
+        <br/>
+    }
+}

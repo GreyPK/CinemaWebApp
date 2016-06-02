@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Поиск";
+}
+
+<h2>Поиск</h2>
+<a class="btn btn-default" href="/Querys/Query1" role="button1" style="margin: 5px">Параметрический запрос 1</a>
+<a class="btn btn-default" href="/Querys/Query2" role="button" style="margin: 5px">Параметрический запрос 2</a>
+<a class="btn btn-default" href="/Querys/Query3" role="button" style="margin: 5px">Параметрический запрос 3</a>
+<a class="btn btn-default" href="/Querys/Query4" role="button" style="margin: 5px">Параметрический запрос 4</a>
+<a class="btn btn-default" href="/Querys/Query4" role="button" style="margin: 5px">Параметрический запрос 5</a>
+<a class="btn btn-default" href="/Querys/Query6" role="button" style="margin: 5px; margin-bottom: 8px;">Параметрический запрос 6</a>
+
+
+@using (Html.BeginForm("Index", "Search", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("date")
+        <input type="submit" value="искать"/>
+    </p>
+}
+@if (ViewBag.sessions != null)
+{
+    <br/>
+    <p>
+        Совпадений по сеансам найдено: @ViewBag.sessions.Count
+    </p>
+    <table>
+
+        @foreach (var session in ViewBag.sessions)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string) session.film.film_name, "Details", "sessions", new {id = session.id_session}, null)
+                    <!-- Html.ActionLink((string)(session.date_session.ToString()), "Details", "sessions", new { id = session.id_session }, null) -->
+                </td>
+
+            </tr>
+        }
+    </table>
+}
+
+@if (ViewBag.films != null)
+{
+    <br/>
+    <p>
+        Совпадений по фильмам найдено: @ViewBag.films.Count
+    </p>
+    <table>
+
+        @foreach (var film in ViewBag.films)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string) film.film_name, "Details", "films", new {id = film.id_film}, null)
+                </td>
+
+            </tr>
+        }
+    </table>
+}
+
+@if (ViewBag.rooms != null)
+{
+    <br/>
+    <p>
+        Совпадений по кинозалам найдено: @ViewBag.rooms.Count
+    </p>
+    <table>
+
+        @foreach (var room in ViewBag.rooms)
+        {
+            <tr>
+                <td>
+                    Кинозал №@(Html.ActionLink((string) room.number_room.ToString(), "Details", "rooms", new {id = room.id_room}, null))
+                </td>
+
+            </tr>
+        }
+    </table>
+}
+
+
+@if (ViewBag.tickets != null)
+{
+    <br/>
+    <p>
+        Совпадений по билетам найдено: @ViewBag.tickets.Count
+    </p>
+    <table>
+
+        @foreach (var ticket in ViewBag.tickets)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string) ("№ Ряда " + ticket.nomber_row.ToString() + " № Места " + ticket.nomber_seat.ToString()), "Details", "tickets", new {id = ticket.id_ticket}, null)
+                </td>
+
+            </tr>
+        }
+    </table>
+}

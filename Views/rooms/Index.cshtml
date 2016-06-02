@@ -1,0 +1,40 @@
+﻿@model IEnumerable<room>
+
+@{
+    ViewBag.Title = "Кинозалы";
+}
+
+<h2>Кинозалы</h2>
+
+<p>
+    @Html.ActionLink("Добавить кинозал", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Номер кинозала
+        </th>
+        <th>
+            Тип кинозала
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.number_room)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.room_type.name_type_room)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new {id = item.id_room}) |
+                @Html.ActionLink("Подробнее", "Details", new {id = item.id_room}) |
+                @Html.ActionLink("Удалить", "Delete", new {id = item.id_room})
+            </td>
+        </tr>
+    }
+
+</table>

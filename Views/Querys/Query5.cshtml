@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Запрос 1";
+}
+
+<h3>Запрос 5. Показать все билеты 17.04.2016</h3>
+
+<pre>
+        SELECT * FROM ticket
+        INNER JOIN session ON ticket.id_session = session.id_session
+        WHERE session.date_session = '17.04.2016'
+</pre>
+
+
+@using (Html.BeginForm("Query5", "Querys", FormMethod.Get))
+{
+    <p>
+        Дата: @Html.TextBox("date") <br/>
+        <input type="submit" value="искать">
+
+    </p>
+}
+
+@if (ViewBag.errors != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @foreach (string error in ViewBag.errors)
+        {
+            <p>@error</p>
+        }
+    </div>
+}
+
+
+
+@if (ViewBag.data != null)
+{
+    foreach (var _ticket in ViewBag.data)
+    {
+        @Html.ActionLink((string) (_ticket["date_session"].ToString() + " " + _ticket["time_session"].ToString() + " " + _ticket["film_name"] + "Ряд: " + _ticket["nomber_row"] + " Место: " + _ticket["nomber_seat"]), "Details", "tickets", new {id = _ticket["id_ticket"]}, null)
+        <br/>
+    }
+}

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Запрос 1";
+}
+defesf
+<h2>Показать все 3д фильмы, отсортировать по имени фильма</h2>
+
+
+@using (Html.BeginForm("Query1", "Querys", FormMethod.Get))
+{
+    <p>
+        Год Класса : @Html.TextBox("type") <br/>
+        <input type="submit" value="искать">
+
+    </p>
+}
+
+@if (ViewBag.data != null)
+{
+    foreach (var film in ViewBag.films)
+    {
+        @Html.ActionLink((string) film.film_name, "Details", "films", new {id = film.id_film}, null)
+    }
+}

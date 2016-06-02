@@ -1,0 +1,34 @@
+﻿@model room
+
+@{
+    ViewBag.Title = "Кинозал подробнее";
+}
+
+<h2>Кинозал подробнее</h2>
+
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            Номер кинозала
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.number_room)
+        </dd>
+
+        <dt>
+            Тип кинозала
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.room_type.name_type_room)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new {id = Model.id_room}) |
+    @Html.ActionLink("Удалить", "Delete", new {id = Model.id_room}) |
+    @Html.ActionLink("Назад", "Index")
+</p>

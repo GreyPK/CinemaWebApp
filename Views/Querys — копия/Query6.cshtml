@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Запрос 1";
+}
+
+<h3>Запрос 6. Показать билет с наценкой для “2d” фильмов</h3>
+
+<pre>
+        SSELECT * FROM ticket
+        INNER JOIN margin ON ticket.id_margin = margin.id_margin
+        WHERE margin.id_film_type = 1 OR margin.id_film_type = 2 
+</pre>
+
+
+@if (ViewBag.data != null)
+{
+    foreach (var _ticket in ViewBag.data)
+    {
+        @Html.ActionLink((string) (_ticket["date_session"].ToString() + " " + _ticket["time_session"].ToString() + " " + _ticket["film_name"] + "Ряд: " + _ticket["nomber_row"] + " Место: " + _ticket["nomber_seat"] + " Тип фильма: " + _ticket["film_type_name"]), "Details", "tickets", new {id = _ticket["id_ticket"]}, null)
+        <br/>
+    }
+}

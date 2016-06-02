@@ -1,0 +1,33 @@
+﻿@model IEnumerable<margin>
+
+@{
+    ViewBag.Title = "Наценки";
+}
+
+<h2>Наценки</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Коэффициент наценки
+        </th>
+        <th>
+            Тип фильма для наценки
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.coef_start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.film_type.film_type_name)
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b64674ac14a44657802a58be23bc37c0" Name="Diagram1">
+        <EntityTypeShape EntityType="CinemaModel.film" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.film_type" Width="1.5" PointX="1" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.margin" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.room" Width="1.5" PointX="8.375" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.room_type" Width="1.5" PointX="5.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.session" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.ticket" Width="1.5" PointX="7.875" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="CinemaModel.fk_film" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.fk_session" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.fk_margin" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.fk_ticket" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.fk_room" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.fk_session_0" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.fk_ticket_0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

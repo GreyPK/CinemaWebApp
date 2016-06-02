@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Поиск по сеансам";
+}
+
+<h2>Поиск по сеансам</h2>
+@using (Html.BeginForm("Index", "SearchSession", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("date")
+        <input type="submit" value="искать"/>
+    </p>
+}
+@if (ViewBag.sessionsDate != null)
+{
+    <br/>
+    <p>
+        Совпадений по дате найдено: @ViewBag.sessionsDate.Count
+    </p>
+    <table>
+
+        @foreach (var session in ViewBag.sessionsDate)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string) ("Дата: " + session.date_session + "; Время: " + session.time_session + "; Базовая цена: " + session.base_price + "; Фильм: " + session.film.film_name + "; Жанр фильма: " + session.film.genre + "; Номер кинозала: " + session.room.number_room + "; Тип кинозала: " + session.room.room_type.name_type_room), "Details", "sessions", new {id = session.id_session}, null)
+                </td>
+
+            </tr>
+        }
+    </table>
+}
+
+@if (ViewBag.sessionsTime != null)
+{
+    <br/>
+    <p>
+        Совпадений по времени найдено: @ViewBag.sessionsTime.Count
+    </p>
+    <table>
+
+        @foreach (var session in ViewBag.sessionsTime)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string) ("Дата: " + session.date_session + "; Время: " + session.time_session + "; Базовая цена: " + session.base_price + "; Фильм: " + session.film.film_name + "; Жанр фильма: " + session.film.genre + "; Номер кинозала: " + session.room.number_room + "; Тип кинозала: " + session.room.room_type.name_type_room), "Details", "sessions", new {id = session.id_session}, null)
+                </td>
+
+            </tr>
+        }
+    </table>
+}
+
+@if (ViewBag.sessionsTime != null)
+{
+    <br/>
+    <p>
+        Совпадений по цене найдено: @ViewBag.sessionsBasePrice.Count
+    </p>
+    <table>
+
+        @foreach (var session in ViewBag.sessionsBasePrice)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string) ("Дата: " + session.date_session + "; Время: " + session.time_session + "; Базовая цена: " + session.base_price + "; Фильм: " + session.film.film_name + "; Жанр фильма: " + session.film.genre + "; Номер кинозала: " + session.room.number_room + "; Тип кинозала: " + session.room.room_type.name_type_room), "Details", "sessions", new {id = session.id_session}, null)</td>
+
+            </tr>
+        }
+    </table>
+}
+
+@if (ViewBag.sessionsFilmName != null)
+{
+    <br/>
+    <p>
+        Совпадений по названию найдено: @ViewBag.sessionsFilmName.Count
+    </p>
+    <table>
+
+        @foreach (var session in ViewBag.sessionsFilmName)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string) ("Дата: " + session.date_session + "; Время: " + session.time_session + "; Базовая цена: " + session.base_price + "; Фильм: " + session.film.film_name + "; Жанр фильма: " + session.film.genre + "; Номер кинозала: " + session.room.number_room + "; Тип кинозала: " + session.room.room_type.name_type_room), "Details", "sessions", new {id = session.id_session}, null)
+                </td>
+
+            </tr>
+        }
+    </table>
+}
+
+@if (ViewBag.sessionsFilmName != null)
+{
+    <br/>
+    <p>
+        Совпадений по номеру кинозала найдено: @ViewBag.sessionsRoomNumber.Count
+    </p>
+
+    <table>
+
+        @foreach (var session in ViewBag.sessionsRoomNumber)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string) ("Дата: " + session.date_session + "; Время: " + session.time_session + "; Базовая цена: " + session.base_price + "; Фильм: " + session.film.film_name + "; Жанр фильма: " + session.film.genre + "; Номер кинозала: " + session.room.number_room + "; Тип кинозала: " + session.room.room_type.name_type_room), "Details", "sessions", new {id = session.id_session}, null)
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (ViewBag.sessionsRoomType != null)
+{
+    <br/>
+    <p>
+        Совпадений по типу кинозала кинозала найдено: @ViewBag.sessionsRoomType.Count
+    </p>
+    <table>
+        <th></th>
+
+
+        @foreach (var session in ViewBag.sessionsRoomType)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string) ("Дата: " + session.date_session + "; Время: " + session.time_session + "; Базовая цена: " + session.base_price + "; Фильм: " + session.film.film_name + "; Жанр фильма: " + session.film.genre + "; Номер кинозала: " + session.room.number_room + "; Тип кинозала: " + session.room.room_type.name_type_room), "Details", "sessions", new {id = session.id_session}, null)</td>
+            </tr>
+        }
+    </table>
+}

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<film>
+
+@{
+    ViewBag.Title = "Фильмы";
+}
+
+<h2>Фильмы</h2>
+
+<p>
+    @Html.ActionLink("Добавить фильм", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Название фильма
+        </th>
+        <th>
+            Режиссер
+        </th>
+        <th>
+            Жанр
+        </th>
+        <th>
+            Роли
+        </th>
+        <th>
+            Длительность
+        </th>
+        <th>
+            Описание
+        </th>
+        <th>
+            Тип
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.film_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.producer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.roles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.review)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.film_type.film_type_name)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new {id = item.id_film}) |
+                @Html.ActionLink("Подробнее", "Details", new {id = item.id_film}) |
+                @Html.ActionLink("Удалить", "Delete", new {id = item.id_film})
+            </td>
+        </tr>
+    }
+
+</table>

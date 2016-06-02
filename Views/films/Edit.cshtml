@@ -1,0 +1,89 @@
+﻿@model film
+
+@{
+    ViewBag.Title = "Редактирование фильма";
+}
+
+<h2>Редактирование фильма</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr/>
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <div class="form-group">
+            @Html.LabelFor(model => model.film_name, "Название фильма", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.film_name, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.film_name, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.producer, "Режиссер", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.producer, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.producer, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.genre, "Жанр", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.genre, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.genre, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.roles, "Роли", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.roles, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.roles, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.duration, "Длительность", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.duration, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.duration, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.review, "Описание", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.review, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.review, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.id_film)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_film_type, "Тип фильма", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownList("id_film_type", null, new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.id_film_type, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

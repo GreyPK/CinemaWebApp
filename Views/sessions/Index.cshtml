@@ -1,0 +1,76 @@
+﻿@model IEnumerable<session>
+
+@{
+    ViewBag.Title = "Сеансы";
+}
+
+<h2>Сеансы</h2>
+
+<p>
+    @Html.ActionLink("Добавить сеанс", "Create")
+</p>
+
+
+<!-- Пробую вставить поиск -->
+<form action="/SearchSession" method="get">
+    <p>
+        <input id="date" name="date" type="text" value="">
+        <input type="submit" value="искать">
+    </p>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            Дата
+        </th>
+        <th>
+            Время
+        </th>
+        <th>
+            Базовая цена
+        </th>
+        <th>
+            Название фильма
+        </th>
+        <th>
+            Номер кинозала
+        </th>
+        <th>
+            Тип кинозала
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_session.Day).@Html.DisplayFor(modelItem => item.date_session.Month).@Html.DisplayFor(modelItem => item.date_session.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time_session)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.base_price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.film.film_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.room.number_room)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.room.room_type.name_type_room)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new {id = item.id_session}) |
+                @Html.ActionLink("Подробнее", "Details", new {id = item.id_session}) |
+                @Html.ActionLink("Удалить", "Delete", new {id = item.id_session})
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CinemaModel" Provider="Npgsql" ProviderManifestToken="9.5.2" Alias="Self"
+              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="film">
+          <Key>
+            <PropertyRef Name="id_film" />
+          </Key>
+          <Property Name="film_name" Type="bpchar" MaxLength="50" Nullable="false" />
+          <Property Name="producer" Type="bpchar" MaxLength="50" Nullable="false" />
+          <Property Name="genre" Type="bpchar" MaxLength="50" Nullable="false" />
+          <Property Name="roles" Type="bpchar" MaxLength="250" Nullable="false" />
+          <Property Name="duration" Type="bpchar" MaxLength="10" Nullable="false" />
+          <Property Name="review" Type="bpchar" MaxLength="2000" Nullable="false" />
+          <Property Name="id_film" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_film_type" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="film_type">
+          <Key>
+            <PropertyRef Name="id_film_type" />
+          </Key>
+          <Property Name="film_type_name" Type="bpchar" MaxLength="6" Nullable="false" />
+          <Property Name="id_film_type" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="margin">
+          <Key>
+            <PropertyRef Name="id_margin" />
+          </Key>
+          <Property Name="coef_start" Type="float4" Nullable="false" />
+          <Property Name="coef_mid" Type="float4" Nullable="false" />
+          <Property Name="coef_end" Type="float4" Nullable="false" />
+          <Property Name="id_margin" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_film_type" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="id_room" />
+          </Key>
+          <Property Name="number_room" Type="int4" Nullable="false" />
+          <Property Name="id_room" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_type_room" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="room_type">
+          <Key>
+            <PropertyRef Name="id_type_room" />
+          </Key>
+          <Property Name="name_type_room" Type="bpchar" MaxLength="20" Nullable="false" />
+          <Property Name="count_rows" Type="int4" Nullable="false" />
+          <Property Name="count_seats" Type="int4" Nullable="false" />
+          <Property Name="id_type_room" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="session">
+          <Key>
+            <PropertyRef Name="id_session" />
+          </Key>
+          <Property Name="date_session" Type="date" Nullable="false" />
+          <Property Name="time_session" Type="time" Precision="6" Nullable="false" />
+          <Property Name="base_price" Type="int4" Nullable="false" />
+          <Property Name="id_session" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_film" Type="int4" Nullable="false" />
+          <Property Name="id_room" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="id_ticket" />
+          </Key>
+          <Property Name="nomber_row" Type="int4" Nullable="false" />
+          <Property Name="nomber_seat" Type="int4" Nullable="false" />
+          <Property Name="id_ticket" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_margin" Type="int4" Nullable="false" />
+          <Property Name="id_session" Type="int4" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_film">
+          <End Role="film_type" Type="Self.film_type" Multiplicity="1" />
+          <End Role="film" Type="Self.film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film_type">
+              <PropertyRef Name="id_film_type" />
+            </Principal>
+            <Dependent Role="film">
+              <PropertyRef Name="id_film_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_margin">
+          <End Role="film_type" Type="Self.film_type" Multiplicity="1" />
+          <End Role="margin" Type="Self.margin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film_type">
+              <PropertyRef Name="id_film_type" />
+            </Principal>
+            <Dependent Role="margin">
+              <PropertyRef Name="id_film_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_room">
+          <End Role="room_type" Type="Self.room_type" Multiplicity="1" />
+          <End Role="room" Type="Self.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_type">
+              <PropertyRef Name="id_type_room" />
+            </Principal>
+            <Dependent Role="room">
+              <PropertyRef Name="id_type_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_session">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="session" Type="Self.session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="id_film" />
+            </Principal>
+            <Dependent Role="session">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_session_0">
+          <End Role="room" Type="Self.room" Multiplicity="1" />
+          <End Role="session" Type="Self.session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id_room" />
+            </Principal>
+            <Dependent Role="session">
+              <PropertyRef Name="id_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ticket">
+          <End Role="margin" Type="Self.margin" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="margin">
+              <PropertyRef Name="id_margin" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_margin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ticket_0">
+          <End Role="session" Type="Self.session" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="session">
+              <PropertyRef Name="id_session" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CinemaModelContainer">
+          <EntitySet Name="film" EntityType="Self.film" Schema="public" store:Type="Tables" />
+          <EntitySet Name="film_type" EntityType="Self.film_type" Schema="public" store:Type="Tables" />
+          <EntitySet Name="margin" EntityType="Self.margin" Schema="public" store:Type="Tables" />
+          <EntitySet Name="room" EntityType="Self.room" Schema="public" store:Type="Tables" />
+          <EntitySet Name="room_type" EntityType="Self.room_type" Schema="public" store:Type="Tables" />
+          <EntitySet Name="session" EntityType="Self.session" Schema="public" store:Type="Tables" />
+          <EntitySet Name="ticket" EntityType="Self.ticket" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="fk_film" Association="Self.fk_film">
+            <End Role="film_type" EntitySet="film_type" />
+            <End Role="film" EntitySet="film" />
+          </AssociationSet>
+          <AssociationSet Name="fk_margin" Association="Self.fk_margin">
+            <End Role="film_type" EntitySet="film_type" />
+            <End Role="margin" EntitySet="margin" />
+          </AssociationSet>
+          <AssociationSet Name="fk_room" Association="Self.fk_room">
+            <End Role="room_type" EntitySet="room_type" />
+            <End Role="room" EntitySet="room" />
+          </AssociationSet>
+          <AssociationSet Name="fk_session" Association="Self.fk_session">
+            <End Role="film" EntitySet="film" />
+            <End Role="session" EntitySet="session" />
+          </AssociationSet>
+          <AssociationSet Name="fk_session_0" Association="Self.fk_session_0">
+            <End Role="room" EntitySet="room" />
+            <End Role="session" EntitySet="session" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ticket" Association="Self.fk_ticket">
+            <End Role="margin" EntitySet="margin" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ticket_0" Association="Self.fk_ticket_0">
+            <End Role="session" EntitySet="session" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="film">
+          <Key>
+            <PropertyRef Name="id_film" />
+          </Key>
+          <Property Name="film_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="producer" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="genre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="roles" Type="String" MaxLength="250" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="duration" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="review" Type="String" MaxLength="2000" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="id_film" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_film_type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="film_type" Relationship="Self.fk_film" FromRole="film" ToRole="film_type" />
+          <NavigationProperty Name="session" Relationship="Self.fk_session" FromRole="film" ToRole="session" />
+        </EntityType>
+        <EntityType Name="film_type">
+          <Key>
+            <PropertyRef Name="id_film_type" />
+          </Key>
+          <Property Name="film_type_name" Type="String" MaxLength="6" FixedLength="true" Unicode="true"
+                    Nullable="false" />
+          <Property Name="id_film_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="film" Relationship="Self.fk_film" FromRole="film_type" ToRole="film" />
+          <NavigationProperty Name="margin" Relationship="Self.fk_margin" FromRole="film_type" ToRole="margin" />
+        </EntityType>
+        <EntityType Name="margin">
+          <Key>
+            <PropertyRef Name="id_margin" />
+          </Key>
+          <Property Name="coef_start" Type="Single" Nullable="false" />
+          <Property Name="coef_mid" Type="Single" Nullable="false" />
+          <Property Name="coef_end" Type="Single" Nullable="false" />
+          <Property Name="id_margin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_film_type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="film_type" Relationship="Self.fk_margin" FromRole="margin" ToRole="film_type" />
+          <NavigationProperty Name="ticket" Relationship="Self.fk_ticket" FromRole="margin" ToRole="ticket" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="id_room" />
+          </Key>
+          <Property Name="number_room" Type="Int32" Nullable="false" />
+          <Property Name="id_room" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_type_room" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="room_type" Relationship="Self.fk_room" FromRole="room" ToRole="room_type" />
+          <NavigationProperty Name="session" Relationship="Self.fk_session_0" FromRole="room" ToRole="session" />
+        </EntityType>
+        <EntityType Name="room_type">
+          <Key>
+            <PropertyRef Name="id_type_room" />
+          </Key>
+          <Property Name="name_type_room" Type="String" MaxLength="20" FixedLength="true" Unicode="true"
+                    Nullable="false" />
+          <Property Name="count_rows" Type="Int32" Nullable="false" />
+          <Property Name="count_seats" Type="Int32" Nullable="false" />
+          <Property Name="id_type_room" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="room" Relationship="Self.fk_room" FromRole="room_type" ToRole="room" />
+        </EntityType>
+        <EntityType Name="session">
+          <Key>
+            <PropertyRef Name="id_session" />
+          </Key>
+          <Property Name="date_session" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="time_session" Type="Time" Precision="6" Nullable="false" />
+          <Property Name="base_price" Type="Int32" Nullable="false" />
+          <Property Name="id_session" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_film" Type="Int32" Nullable="false" />
+          <Property Name="id_room" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="film" Relationship="Self.fk_session" FromRole="session" ToRole="film" />
+          <NavigationProperty Name="room" Relationship="Self.fk_session_0" FromRole="session" ToRole="room" />
+          <NavigationProperty Name="ticket" Relationship="Self.fk_ticket_0" FromRole="session" ToRole="ticket" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="id_ticket" />
+          </Key>
+          <Property Name="nomber_row" Type="Int32" Nullable="false" />
+          <Property Name="nomber_seat" Type="Int32" Nullable="false" />
+          <Property Name="id_ticket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_margin" Type="Int32" Nullable="false" />
+          <Property Name="id_session" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="margin" Relationship="Self.fk_ticket" FromRole="ticket" ToRole="margin" />
+          <NavigationProperty Name="session" Relationship="Self.fk_ticket_0" FromRole="ticket" ToRole="session" />
+        </EntityType>
+        <Association Name="fk_film">
+          <End Role="film_type" Type="Self.film_type" Multiplicity="1" />
+          <End Role="film" Type="Self.film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film_type">
+              <PropertyRef Name="id_film_type" />
+            </Principal>
+            <Dependent Role="film">
+              <PropertyRef Name="id_film_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_session">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="session" Type="Self.session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="id_film" />
+            </Principal>
+            <Dependent Role="session">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_margin">
+          <End Role="film_type" Type="Self.film_type" Multiplicity="1" />
+          <End Role="margin" Type="Self.margin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film_type">
+              <PropertyRef Name="id_film_type" />
+            </Principal>
+            <Dependent Role="margin">
+              <PropertyRef Name="id_film_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ticket">
+          <End Role="margin" Type="Self.margin" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="margin">
+              <PropertyRef Name="id_margin" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_margin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_room">
+          <End Role="room_type" Type="Self.room_type" Multiplicity="1" />
+          <End Role="room" Type="Self.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_type">
+              <PropertyRef Name="id_type_room" />
+            </Principal>
+            <Dependent Role="room">
+              <PropertyRef Name="id_type_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_session_0">
+          <End Role="room" Type="Self.room" Multiplicity="1" />
+          <End Role="session" Type="Self.session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id_room" />
+            </Principal>
+            <Dependent Role="session">
+              <PropertyRef Name="id_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ticket_0">
+          <End Role="session" Type="Self.session" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="session">
+              <PropertyRef Name="id_session" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="normCinemaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="film" EntityType="Self.film" />
+          <EntitySet Name="film_type" EntityType="Self.film_type" />
+          <EntitySet Name="margin" EntityType="Self.margin" />
+          <EntitySet Name="room" EntityType="Self.room" />
+          <EntitySet Name="room_type" EntityType="Self.room_type" />
+          <EntitySet Name="session" EntityType="Self.session" />
+          <EntitySet Name="ticket" EntityType="Self.ticket" />
+          <AssociationSet Name="fk_film" Association="Self.fk_film">
+            <End Role="film_type" EntitySet="film_type" />
+            <End Role="film" EntitySet="film" />
+          </AssociationSet>
+          <AssociationSet Name="fk_session" Association="Self.fk_session">
+            <End Role="film" EntitySet="film" />
+            <End Role="session" EntitySet="session" />
+          </AssociationSet>
+          <AssociationSet Name="fk_margin" Association="Self.fk_margin">
+            <End Role="film_type" EntitySet="film_type" />
+            <End Role="margin" EntitySet="margin" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ticket" Association="Self.fk_ticket">
+            <End Role="margin" EntitySet="margin" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+          <AssociationSet Name="fk_room" Association="Self.fk_room">
+            <End Role="room_type" EntitySet="room_type" />
+            <End Role="room" EntitySet="room" />
+          </AssociationSet>
+          <AssociationSet Name="fk_session_0" Association="Self.fk_session_0">
+            <End Role="room" EntitySet="room" />
+            <End Role="session" EntitySet="session" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ticket_0" Association="Self.fk_ticket_0">
+            <End Role="session" EntitySet="session" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CinemaModelContainer"
+                                CdmEntityContainer="normCinemaEntities">
+          <EntitySetMapping Name="film">
+            <EntityTypeMapping TypeName="CinemaModel.film">
+              <MappingFragment StoreEntitySet="film">
+                <ScalarProperty Name="film_name" ColumnName="film_name" />
+                <ScalarProperty Name="producer" ColumnName="producer" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
+                <ScalarProperty Name="roles" ColumnName="roles" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="review" ColumnName="review" />
+                <ScalarProperty Name="id_film" ColumnName="id_film" />
+                <ScalarProperty Name="id_film_type" ColumnName="id_film_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="film_type">
+            <EntityTypeMapping TypeName="CinemaModel.film_type">
+              <MappingFragment StoreEntitySet="film_type">
+                <ScalarProperty Name="film_type_name" ColumnName="film_type_name" />
+                <ScalarProperty Name="id_film_type" ColumnName="id_film_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="margin">
+            <EntityTypeMapping TypeName="CinemaModel.margin">
+              <MappingFragment StoreEntitySet="margin">
+                <ScalarProperty Name="coef_start" ColumnName="coef_start" />
+                <ScalarProperty Name="coef_mid" ColumnName="coef_mid" />
+                <ScalarProperty Name="coef_end" ColumnName="coef_end" />
+                <ScalarProperty Name="id_margin" ColumnName="id_margin" />
+                <ScalarProperty Name="id_film_type" ColumnName="id_film_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="room">
+            <EntityTypeMapping TypeName="CinemaModel.room">
+              <MappingFragment StoreEntitySet="room">
+                <ScalarProperty Name="number_room" ColumnName="number_room" />
+                <ScalarProperty Name="id_room" ColumnName="id_room" />
+                <ScalarProperty Name="id_type_room" ColumnName="id_type_room" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="room_type">
+            <EntityTypeMapping TypeName="CinemaModel.room_type">
+              <MappingFragment StoreEntitySet="room_type">
+                <ScalarProperty Name="name_type_room" ColumnName="name_type_room" />
+                <ScalarProperty Name="count_rows" ColumnName="count_rows" />
+                <ScalarProperty Name="count_seats" ColumnName="count_seats" />
+                <ScalarProperty Name="id_type_room" ColumnName="id_type_room" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="session">
+            <EntityTypeMapping TypeName="CinemaModel.session">
+              <MappingFragment StoreEntitySet="session">
+                <ScalarProperty Name="date_session" ColumnName="date_session" />
+                <ScalarProperty Name="time_session" ColumnName="time_session" />
+                <ScalarProperty Name="base_price" ColumnName="base_price" />
+                <ScalarProperty Name="id_session" ColumnName="id_session" />
+                <ScalarProperty Name="id_film" ColumnName="id_film" />
+                <ScalarProperty Name="id_room" ColumnName="id_room" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ticket">
+            <EntityTypeMapping TypeName="CinemaModel.ticket">
+              <MappingFragment StoreEntitySet="ticket">
+                <ScalarProperty Name="nomber_row" ColumnName="nomber_row" />
+                <ScalarProperty Name="nomber_seat" ColumnName="nomber_seat" />
+                <ScalarProperty Name="id_ticket" ColumnName="id_ticket" />
+                <ScalarProperty Name="id_margin" ColumnName="id_margin" />
+                <ScalarProperty Name="id_session" ColumnName="id_session" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

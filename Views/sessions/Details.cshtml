@@ -1,0 +1,74 @@
+﻿@model session
+
+@{
+    ViewBag.Title = "Подробнее";
+}
+
+<h2>Сеанс подробнее</h2>
+
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            Дата сеанса
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_session)
+        </dd>
+
+        <dt>
+            Время сеанса
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time_session)
+        </dd>
+
+        <dt>
+            Базовая цена
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.base_price)
+        </dd>
+
+        <dt>
+            Название фильма
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.film.film_name)
+        </dd>
+        <dt>
+            Жанр фильма
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.film.genre)
+        </dd>
+
+
+        <dt>
+            Номер кинозала
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.room.number_room)
+        </dd>
+
+        <dt>
+            Тип кинозала
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.room.room_type.name_type_room)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new {id = Model.id_session}) |
+    @Html.ActionLink("Удалить", "Delete", new {id = Model.id_session}) |
+    @Html.ActionLink("Назад", "Index")
+</p>

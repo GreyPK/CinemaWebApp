@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище TheCinemaModelContainer" CdmEntityContainer="TheGGCinemaEntities">
+    <EntitySetMapping Name="film">
+      <EntityTypeMapping TypeName="TheCinemaModel.film">
+        <MappingFragment StoreEntitySet="film">
+          <ScalarProperty Name="film_name" ColumnName="film_name" />
+          <ScalarProperty Name="producer" ColumnName="producer" />
+          <ScalarProperty Name="genre" ColumnName="genre" />
+          <ScalarProperty Name="roles" ColumnName="roles" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="review" ColumnName="review" />
+          <ScalarProperty Name="id_film" ColumnName="id_film" />
+          <ScalarProperty Name="id_film_type" ColumnName="id_film_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="film_type">
+      <EntityTypeMapping TypeName="TheCinemaModel.film_type">
+        <MappingFragment StoreEntitySet="film_type">
+          <ScalarProperty Name="film_type_name" ColumnName="film_type_name" />
+          <ScalarProperty Name="id_film_type" ColumnName="id_film_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="margin">
+      <EntityTypeMapping TypeName="TheCinemaModel.margin">
+        <MappingFragment StoreEntitySet="margin">
+          <ScalarProperty Name="coef_start" ColumnName="coef_start" />
+          <ScalarProperty Name="coef_mid" ColumnName="coef_mid" />
+          <ScalarProperty Name="coef_end" ColumnName="coef_end" />
+          <ScalarProperty Name="id_margin" ColumnName="id_margin" />
+          <ScalarProperty Name="id_film_type" ColumnName="id_film_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="room">
+      <EntityTypeMapping TypeName="TheCinemaModel.room">
+        <MappingFragment StoreEntitySet="room">
+          <ScalarProperty Name="number_room" ColumnName="number_room" />
+          <ScalarProperty Name="id_room" ColumnName="id_room" />
+          <ScalarProperty Name="id_type_room" ColumnName="id_type_room" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="room_type">
+      <EntityTypeMapping TypeName="TheCinemaModel.room_type">
+        <MappingFragment StoreEntitySet="room_type">
+          <ScalarProperty Name="name_type_room" ColumnName="name_type_room" />
+          <ScalarProperty Name="count_rows" ColumnName="count_rows" />
+          <ScalarProperty Name="count_seats" ColumnName="count_seats" />
+          <ScalarProperty Name="id_type_room" ColumnName="id_type_room" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="session">
+      <EntityTypeMapping TypeName="TheCinemaModel.session">
+        <MappingFragment StoreEntitySet="session">
+          <ScalarProperty Name="date_session" ColumnName="date_session" />
+          <ScalarProperty Name="time_session" ColumnName="time_session" />
+          <ScalarProperty Name="base_price" ColumnName="base_price" />
+          <ScalarProperty Name="id_session" ColumnName="id_session" />
+          <ScalarProperty Name="id_film" ColumnName="id_film" />
+          <ScalarProperty Name="id_room" ColumnName="id_room" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ticket">
+      <EntityTypeMapping TypeName="TheCinemaModel.ticket">
+        <MappingFragment StoreEntitySet="ticket">
+          <ScalarProperty Name="nomber_row" ColumnName="nomber_row" />
+          <ScalarProperty Name="nomber_seat" ColumnName="nomber_seat" />
+          <ScalarProperty Name="id_ticket" ColumnName="id_ticket" />
+          <ScalarProperty Name="id_margin" ColumnName="id_margin" />
+          <ScalarProperty Name="id_session" ColumnName="id_session" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

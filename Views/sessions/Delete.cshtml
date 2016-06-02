@@ -1,0 +1,73 @@
+﻿@model session
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Удаление</h2>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            Дата сеанса
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_session)
+        </dd>
+
+        <dt>
+            Время сеанса
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time_session)
+        </dd>
+
+        <dt>
+            Базовая цена
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.base_price)
+        </dd>
+
+        <dt>
+            Название фильма
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.film.film_name)
+        </dd>
+
+        <dt>
+            Номер кинозала
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.room.number_room)
+        </dd>
+
+        <dt>
+            Тип кинозала
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.room.room_type.name_type_room)
+        </dd>
+
+    </dl>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default"/> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

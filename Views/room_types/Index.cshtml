@@ -1,0 +1,37 @@
+﻿@model IEnumerable<room_type>
+
+@{
+    ViewBag.Title = "Типы кинозалов";
+}
+
+<h2>Типы кинозалов</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Название типа кинозала
+        </th>
+        <th>
+            Количество рядов
+        </th>
+        <th>
+            Количество мест
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name_type_room)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.count_rows)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.count_seats)
+            </td>
+        </tr>
+    }
+
+</table>

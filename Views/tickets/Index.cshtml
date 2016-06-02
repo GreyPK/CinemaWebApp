@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ticket>
+
+@{
+    ViewBag.Title = "Билеты";
+}
+
+<h2>Билеты</h2>
+
+<p>
+    @Html.ActionLink("Добавить билет", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Номер ряда
+        </th>
+        <th>
+            Номер места
+        </th>
+        <th>
+            Коэффициент наценки
+        </th>
+
+        <!-- Сеанс для билета -->
+
+        <th>
+            Дата
+        </th>
+        <th>
+            Время
+        </th>
+        <th>
+            Базовая цена
+        </th>
+        <th>
+            Название фильма
+        </th>
+        <th>
+            Тип фильма
+        </th>
+        <th>
+            Номер кинозала
+        </th>
+        <th>
+            Тип кинозала
+        </th>
+
+
+        <!-- /Сеанс для билета -->
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomber_row)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomber_seat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.margin.coef_start)
+            </td>
+
+            <!-- Сеанс для билета -->
+            <td>
+                @Html.DisplayFor(modelItem => item.session.date_session.Day).@Html.DisplayFor(modelItem => item.session.date_session.Month).@Html.DisplayFor(modelItem => item.session.date_session.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.session.time_session)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.session.base_price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.session.film.film_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.session.film.film_type.film_type_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.session.room.number_room)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.session.room.room_type.name_type_room)
+            </td>
+            <!-- /Сеанс для билета -->
+
+            <td>
+                @Html.ActionLink("Подробнее", "Details", new {id = item.id_ticket}) |
+                @Html.ActionLink("Удалить", "Delete", new {id = item.id_ticket})
+            </td>
+        </tr>
+    }
+
+</table>
