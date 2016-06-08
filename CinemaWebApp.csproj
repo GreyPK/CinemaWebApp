@@ -311,7 +311,6 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\SearchSession\Index.cshtml" />
     <Content Include="Views\sessions\SpecialForTickets.cshtml" />
-    <Content Include="Views\Querys\Index.cshtml" />
     <Content Include="Views\Querys\Query1.cshtml" />
     <None Include="Views\Querys\Query2.cshtml" />
     <None Include="Views\Querys\Query3.cshtml" />
